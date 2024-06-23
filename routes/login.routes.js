@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require("../models/User");
 const { SHA256 } = require("crypto-js");
 const encBase64 = require("crypto-js/enc-base64");
-const uid2 = require("uid2");
 const fileUpload = require("express-fileupload");
 
 router.post("/login", fileUpload(), async (req, res) => {
@@ -16,7 +15,6 @@ router.post("/login", fileUpload(), async (req, res) => {
         return res.status(400).json({ message: "bad request" });
       } else {
         const pwdHash = SHA256(password + user.salt).toString(encBase64);
-        // const match = await bcrypt.compare(password, user.hash);
         if (pwdHash === user.hash) {
           // console.log('user:', user);
           return res.status(200).json({

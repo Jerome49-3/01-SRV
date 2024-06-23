@@ -9,20 +9,20 @@ const fileUpload = require("express-fileupload");
 router.post("/signup", fileUpload(), async (req, res) => {
   // return res.status(200).json({ message: "je suis sur la route /signup" });
   const { password, username, email } = req.body;
-  console.log("req.body", req.body);
+  // console.log("req.body", req.body);
   if (password !== undefined && email !== undefined) {
     const userExist = await User.findOne({ email: email });
-    console.log("userExist", userExist);
+    // console.log("userExist", userExist);
     if (userExist) {
       return res.status(400).json({ message: "bad request" });
     } else {
       try {
         const salt = uid2(24);
-        console.log("salt:", salt);
+        // console.log("salt:", salt);
         const hash = SHA256(password + salt).toString(encBase64);
-        console.log("hash:", hash);
+        // console.log("hash:", hash);
         const token = uid2(64);
-        console.log("token:", token);
+        // console.log("token:", token);
         if ((hash && token !== null) || (hash && token !== undefined)) {
           const newUser = new User({
             email: email,
@@ -33,9 +33,9 @@ router.post("/signup", fileUpload(), async (req, res) => {
             hash: hash,
             salt: salt,
           });
-          console.log("newUser before save:", newUser);
+          // console.log("newUser before save:", newUser);
           await newUser.save();
-          console.log("newUser after save:", newUser);
+          // console.log("newUser after save:", newUser);
           return res.status(201).json(newUser);
         }
       } catch (error) {
