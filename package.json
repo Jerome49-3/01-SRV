@@ -8,5 +8,14 @@
     "express-fileupload": "^1.5.0",
     "mongoose": "^8.4.3",
     "uid2": "^1.0.0"
-  }
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "name": "01-SRV",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Jerome49-3/01-SRV.git",
+  "author": "jerome <151376824+Jerome49-3@users.noreply.github.com>",
+  "license": "MIT"
 }
