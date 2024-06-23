@@ -28,6 +28,12 @@ app.use(comic);
 app.use("/user", login);
 app.use("/user", signup);
 
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .json({ message: "Welcome on my projet Marvel (under construction ^_^" });
+});
+
 app.all("*", (req, res) => {
   console.log("All routes");
 });
