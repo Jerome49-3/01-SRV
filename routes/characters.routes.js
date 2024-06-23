@@ -14,12 +14,18 @@ router.get(`/characters`, async (req, res) => {
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY_MARVEL}&name=${name}&limit=${limit}&skip=${skip}`
     );
-    // console.log("response", response);
+    // console.log("response.data", response.data);
     if (response) {
       // console.log("response.data.results", response.data.results);
-      // data = response.data.results;
+      data = response.data.results;
       // console.log("data", data);
-      res.status(200).json(response.data.results);
+      const count = response.data.count;
+      return res.status(200).json({
+        dataMarv: {
+          data,
+          count: count,
+        },
+      });
     }
   } catch (error) {
     console.log("error", error);
